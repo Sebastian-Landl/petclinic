@@ -7,6 +7,7 @@
   import Button from "../components/Button";
   import Select from "../components/Select";
   import TextArea from "../components/TextArea";
+  import TimeInput from "../components/TimeInput";
 
   export let visible = false;
   export let allVetItem;
@@ -17,6 +18,8 @@
   let showRemove;
   let newVisit = {
     date: date,
+    startTime: null,
+    endTime: null,
     text: "",
     petItem: {
       value: null,
@@ -35,6 +38,8 @@
     newVisit = {
       id: visit.id,
       date: visit.date,
+      startTime: visit.startTime || null,
+      endTime: visit.endTime || null,
       text: visit.text,
       petItem: {
         value: visit.petItem.value,
@@ -102,6 +107,22 @@
 
 <div class="flex flex-col">
   <form class="w-full">
+    <div class="flex flex-row gap-4">
+      <div class="w-1/2">
+        <TimeInput
+          bind:value={newVisit.startTime}
+          label="Start Time (24h)"
+          placeholder="HH:MM"
+        />
+      </div>
+      <div class="w-1/2">
+        <TimeInput
+          bind:value={newVisit.endTime}
+          label="End Time (24h)"
+          placeholder="HH:MM"
+        />
+      </div>
+    </div>
     <div class="w-full">
       <TextArea
         bind:value={newVisit.text}

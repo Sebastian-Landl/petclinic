@@ -47,4 +47,20 @@
                 referencedColumnNames="id"
         />
     </changeSet>
+
+    <changeSet id="2" author="petclinic">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="visit" />
+            <not><columnExists tableName="visit" columnName="start_time" /></not>
+            <not><columnExists tableName="visit" columnName="end_time" /></not>
+        </preConditions>
+        <addColumn tableName="visit">
+            <column name="start_time" type="TIME" defaultValue="NULL">
+                <constraints nullable="true"/>
+            </column>
+            <column name="end_time" type="TIME" defaultValue="NULL">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

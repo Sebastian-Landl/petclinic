@@ -7,3 +7,11 @@
 == Dark and Light Mode
 * Now implement a dark and light mode. Also implement a toggle in the UI.
 * Hey not everything turns dark in the dark mode yet. The filter in the sub pages and the header of the results is still white in darkmode.
+
+== Time Input
+* Extend the Visit with a time (start time, end time). Also add the ability to set the start and end time of a visit on the visits subpage where the vets can also enter a diagnosis. The idea is that pet owners can choose a day for the visit and the vet can then enter the exact time the visit happened on that day.
+* The styling in the visit ui is now ugly. The rows representing visits are of different lengths (they even change after entering the time). Fix them to be of consistent length. Also on the time I only need hour and minute for the time. And also display the duration there.
+* Please don't display the seconds in the UI. We don't need the seconds in eneral also in the backend.
+* Change one more thing: in the UI I want to enter the time in 24h format
+* It is still not 24h. When I enter the time, it still says AM/PM
+* One more thing. Please move the liquibase changeset into the existing visit.xml. We don't want the v2 folder.

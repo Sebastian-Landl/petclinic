@@ -3,6 +3,7 @@
   import { toast } from "../components/Toast";
   import { loadAllValue } from "../utils/rest.js";
   import { mapify } from "../utils/list.js";
+  import { calculateDuration, formatTimeString } from "../utils/date.js";
   import Icon from "../components/Icon";
   import Select from "../components/Select";
   import VisitDiagnose from "./VisitDiagnose.svelte";
@@ -96,16 +97,19 @@
   <div class="flex-grow">
     {#each [...allVisitByDate] as [date, allVisitOfDate], i}
       <h4>{date} <small>({allVisitOfDate.length})</small></h4>
-      <table class="table-fixed">
+      <table class="table-fixed w-full">
         <thead class="justify-between">
           <tr class="bg-gray-100">
-            <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-2/6">
+            <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/4">
               <span class="text-gray-600">Owner</span>
             </th>
-            <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-2/6">
+            <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/4">
               <span class="text-gray-600">Pet</span>
             </th>
-            <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-2/6">
+            <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/4">
+              <span class="text-gray-600">Time / Duration</span>
+            </th>
+            <th class="px-2 py-3 border-b-2 border-gray-300 text-left w-1/4">
               <span class="text-gray-600">Vet</span>
             </th>
             <th class="px-2 py-3 border-b-2 border-gray-300 w-16"> </th>
@@ -117,14 +121,27 @@
               on:click={(e) => onVisitClicked(visit)}
               title={visit.id}
               class:ring={visitId === visit.id}
+              class="h-12"
             >
-              <td class="px-2 py-3 text-left">
+              <td class="px-2 py-3 text-left truncate">
                 {visit.ownerItem.text}
               </td>
-              <td class="px-2 py-3 text-left">
+              <td class="px-2 py-3 text-left truncate">
                 {visit.petItem.text}
               </td>
               <td class="px-2 py-3 text-left">
+                {#if visit.startTime && visit.endTime}
+                  <div>{formatTimeString(visit.startTime)} - {formatTimeString(visit.endTime)}</div>
+                  <div class="text-sm text-gray-500">
+                    {calculateDuration(visit.startTime, visit.endTime)}
+                  </div>
+                {:else if visit.startTime}
+                  {formatTimeString(visit.startTime)}
+                {:else}
+                  -
+                {/if}
+              </td>
+              <td class="px-2 py-3 text-left truncate">
                 {visit.vetItem.text}
               </td>
               <td class="px-2 py-3">
@@ -139,21 +156,21 @@
             </tr>
             {#if visitEditorUpdate && visitId === visit.id}
               <tr>
-                <td class="px-4" colspan="4">
+                <td class="px-4" colspan="5">
                   <VisitDiagnose
                     bind:visible={visitEditorUpdate}
-                    on:update={(e) => reloadAllVisit()}
-                    on:remove={(e) => reloadAllVisit()}
+                    on:update={() => reloadAllVisit()}
+                    on:remove={() => reloadAllVisit()}
                     {date}
                     {visit}
                     {allVetItem}
                   />
-                </td><td> </td></tr
-              >
+                </td>
+              </tr>
             {/if}
           {:else}
             <tr>
-              <td class="px-2 py-3" colspan="4"> No visits </td>
+              <td class="px-2 py-3" colspan="5"> No visits </td>
             </tr>
           {/each}
         </tbody>

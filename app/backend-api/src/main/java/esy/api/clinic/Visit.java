@@ -13,6 +13,7 @@ import lombok.NonNull;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -29,6 +30,16 @@ public final class Visit extends JsonJpaEntity<Visit> {
     @Getter
     @JsonProperty
     private LocalDate date;
+
+    @Column(name = "start_time")
+    @Getter
+    @JsonProperty
+    private LocalTime startTime;
+
+    @Column(name = "end_time")
+    @Getter
+    @JsonProperty
+    private LocalTime endTime;
 
     @Column(name = "text")
     @Getter
@@ -54,6 +65,8 @@ public final class Visit extends JsonJpaEntity<Visit> {
     Visit() {
         super();
         this.date = LocalDate.of(2000, 1, 1);
+        this.startTime = null;
+        this.endTime = null;
         this.text = "";
         this.pet = null;
         this.vet = null;
@@ -62,6 +75,8 @@ public final class Visit extends JsonJpaEntity<Visit> {
     Visit(@NonNull final Long version, @NonNull final UUID id) {
         super(version, id);
         this.date = LocalDate.of(2000, 1, 1);
+        this.startTime = null;
+        this.endTime = null;
         this.text = "";
         this.pet = null;
         this.vet = null;
@@ -81,6 +96,8 @@ public final class Visit extends JsonJpaEntity<Visit> {
             return false;
         }
         return this.date.equals(that.date) &&
+                Objects.equals(this.startTime, that.startTime) &&
+                Objects.equals(this.endTime, that.endTime) &&
                 this.text.equals(that.text) &&
                 Objects.equals(this.pet, that.pet) &&
                 Objects.equals(this.vet, that.vet);
@@ -98,6 +115,8 @@ public final class Visit extends JsonJpaEntity<Visit> {
         }
         final Visit value = new Visit(getVersion(), id);
         value.date = this.date;
+        value.startTime = this.startTime;
+        value.endTime = this.endTime;
         value.text = this.text;
         value.pet = this.pet;
         value.vet = this.vet;
