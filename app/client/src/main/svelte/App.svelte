@@ -16,6 +16,7 @@
   import Vet from "./pages/Vet.svelte";
   import VetViewer from "./pages/VetViewer.svelte";
   import Visit from "./pages/Visit.svelte";
+  import VisitCalendar from "./pages/VisitCalendar.svelte";
   import ThemeToggle from "./components/ThemeToggle";
   import { theme } from "./stores/theme.js";
 
@@ -34,6 +35,7 @@
     { name: "Owners", path: "/owner", icon: "person" },
     { name: "Pets", path: "/pet", icon: "pets" },
     { name: "Visits", path: "/visit", icon: "event" },
+    { name: "Calendar", path: "/visit/calendar", icon: "calendar_month" },
     { name: "Vets", path: "/vet", icon: "medical_services" },
   ];
 
@@ -135,6 +137,12 @@
               </a>
             </li>
             <li>
+              <a href="/visit/calendar" class="flex items-center px-2 py-1 text-sm text-github-text dark:text-github-darkText hover:bg-github-hover dark:hover:bg-github-darkHover rounded-md">
+                <i class="material-icons text-github-gray dark:text-github-darkGray text-sm mr-2">calendar_month</i>
+                Calendar
+              </a>
+            </li>
+            <li>
               <a href="/vet" class="flex items-center px-2 py-1 text-sm text-github-text dark:text-github-darkText hover:bg-github-hover dark:hover:bg-github-darkHover rounded-md">
                 <i class="material-icons text-github-gray dark:text-github-darkGray text-sm mr-2">medical_services</i>
                 Vets
@@ -191,6 +199,7 @@
       <Route path="/pet" component={Pet} />
       <Route path="/pet/:id" component={PetViewer} />
       <Route path="/visit" component={Visit} />
+      <Route path="/visit/calendar" component={VisitCalendar} />
       <Route path="/vet" component={Vet} />
       <Route path="/vet/:id" component={VetViewer} />
       <Route path="/enum/skill" component={Enum} art="skill" />

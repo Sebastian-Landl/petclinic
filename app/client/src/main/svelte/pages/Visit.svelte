@@ -83,7 +83,7 @@
 
 <h1>Visit</h1>
 <div class="flex flex-col gap-1 ml-2 mr-2">
-  <div class="flex-grow">
+  <div class="flex justify-between items-center mb-4">
     <Select
       bind:value={filterPrefix}
       valueGetter={(v) => v?.value}
@@ -92,7 +92,15 @@
       nullable
       label="Filter"
       placeholder="Choose species"
+      class="flex-grow"
     />
+    <a
+      href="/visit/calendar"
+      class="flex items-center px-3 py-2 bg-github-header dark:bg-github-darkHeader text-white rounded hover:bg-opacity-90 ml-4"
+    >
+      <i class="material-icons text-sm mr-1">calendar_month</i>
+      Calendar View
+    </a>
   </div>
   <div class="flex-grow">
     {#each [...allVisitByDate] as [date, allVisitOfDate], i}

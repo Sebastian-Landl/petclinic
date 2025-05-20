@@ -15,3 +15,6 @@
 * Change one more thing: in the UI I want to enter the time in 24h format
 * It is still not 24h. When I enter the time, it still says AM/PM
 * One more thing. Please move the liquibase changeset into the existing visit.xml. We don't want the v2 folder.
+
+== Calendar View
+* Next create a calendar view, where I can see all visits. Display a week at a time. When a visit has a timeslot, display it as a block taking up that timeslot. When a vist does not have a time just display it like a header of the day (liek a full day event in the MS outlook calendar).
