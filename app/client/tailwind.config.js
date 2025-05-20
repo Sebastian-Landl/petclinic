@@ -7,7 +7,30 @@ export default {
     extend: {
       colors: {
         transparent: "transparent",
-        primary: colors.indigo,
+        primary: {
+          50: "#f1f8ff",
+          100: "#dbedff",
+          200: "#c8e1ff",
+          300: "#79b8ff",
+          400: "#2188ff",
+          500: "#0366d6", // GitHub primary blue
+          600: "#005cc5",
+          700: "#044289",
+          800: "#032f62",
+          900: "#05264c",
+        },
+        github: {
+          bg: "#f6f8fa",       // GitHub background
+          border: "#e1e4e8",   // GitHub border color
+          header: "#24292e",   // GitHub header
+          text: "#24292e",     // GitHub text
+          link: "#0366d6",     // GitHub link
+          hover: "#f6f8fa",    // GitHub hover background
+          success: "#2ea44f",  // GitHub success/green
+          danger: "#cb2431",   // GitHub danger/red
+          warning: "#f9c513",  // GitHub warning/yellow
+          gray: "#6a737d",     // GitHub gray text
+        },
         title: colors.gray,
         label: colors.gray,
         error: colors.red,

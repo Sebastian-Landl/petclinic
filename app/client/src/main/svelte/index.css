@@ -3,51 +3,90 @@
 @import "tailwindcss/utilities";
 
 html {
-  font-family: "Roboto", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+body {
+  @apply bg-github-bg text-github-text;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 h1,
 .h1 {
-  @apply text-5xl font-light;
-  letter-spacing: -1.5px;
+  @apply text-3xl font-semibold;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
 }
 
 h2,
 .h2 {
-  @apply text-4xl font-light;
+  @apply text-2xl font-semibold;
   letter-spacing: -0.5px;
+  margin-bottom: 0.75rem;
 }
 
 h3,
 .h3 {
-  @apply text-3xl font-normal;
-  letter-spacing: 0px;
+  @apply text-xl font-semibold;
+  letter-spacing: -0.25px;
+  margin-bottom: 0.5rem;
 }
 
 h4,
 .h4 {
-  @apply text-2xl font-normal;
-  letter-spacing: 0.25px;
+  @apply text-lg font-semibold;
+  letter-spacing: 0px;
+  margin-bottom: 0.5rem;
 }
 
 h5,
 .h5 {
-  @apply text-xl font-normal;
+  @apply text-base font-semibold;
   letter-spacing: 0px;
+  margin-bottom: 0.5rem;
 }
 
 h6,
 .h6 {
-  @apply text-base font-medium;
-  letter-spacing: 0.15px;
+  @apply text-sm font-semibold;
+  letter-spacing: 0px;
+  margin-bottom: 0.5rem;
 }
 
 hr {
-  @apply border-t border-gray-400 border-solid;
+  @apply border-t border-github-border;
+  margin: 1rem 0;
 }
 
-.a {
-  @apply underline text-blue-600;
+a {
+  @apply text-github-link hover:underline;
+}
+
+/* GitHub-style table */
+.github-table {
+  @apply w-full border-collapse;
+}
+
+.github-table th {
+  @apply bg-github-bg text-github-text text-left py-2 px-4 font-semibold border-b border-github-border;
+}
+
+.github-table td {
+  @apply py-2 px-4 border-b border-github-border;
+}
+
+.github-table tr:hover {
+  @apply bg-github-hover;
+}
+
+/* GitHub-style card */
+.github-card {
+  @apply bg-white border border-github-border rounded-md p-4 mb-4;
+}
+
+.github-card-header {
+  @apply flex justify-between items-center mb-4 pb-2 border-b border-github-border;
 }
 
 button:focus {

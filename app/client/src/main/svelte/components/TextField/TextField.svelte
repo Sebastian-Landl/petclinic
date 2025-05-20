@@ -2,11 +2,12 @@
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
   import filterProps from "../filterProps.js";
-  const props = filterProps(["disabled", "label", "title", "value"], $$props);
+  const props = filterProps(["disabled", "label", "title", "value", "placeholder"], $$props);
   export let disabled = false;
   export let label = undefined;
   export let title = undefined;
   export let value;
+  export let placeholder = "";
   let focused;
   let element;
   export function focus() {
@@ -21,24 +22,25 @@
 
 <div class="mt-1 relative">
   {#if label}
-    <span
-      class="px-4 pt-2 text-xs absolute left-0 top-0"
-      class:text-label-600={!focused}
-      class:text-primary-500={focused}
+    <label
+      for="input-{label}"
+      class="block text-sm font-medium text-github-text mb-1"
     >
       {label}
-    </span>
+    </label>
   {/if}
   <input
+    id="input-{label}"
     bind:this={element}
     type="text"
     {...props}
     {title}
     {disabled}
-    class="disabled:opacity-50 w-full px-4 text-black bg-gray-100"
-    class:pt-6={label}
-    class:border-0={!focused}
-    class:border-b={label}
+    {placeholder}
+    class="block w-full px-3 py-2 border border-github-border rounded-md shadow-sm placeholder-github-gray
+           focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500
+           text-github-text bg-white text-sm
+           {disabled ? 'opacity-60 cursor-not-allowed bg-github-bg' : ''}"
     aria-label={label}
     bind:value={valueInternal}
     on:change={onChange}

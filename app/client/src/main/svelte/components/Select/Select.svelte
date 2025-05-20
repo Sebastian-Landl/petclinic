@@ -84,42 +84,51 @@
 
 <div class="mt-1 relative">
   {#if label}
-    <span
-      {title}
-      class="px-4 pt-2 text-xs absolute left-0 top-0"
-      class:text-label-600={!_focused}
-      class:text-primary-500={_focused}
+    <label
+      for="select-{label}"
+      class="block text-sm font-medium text-github-text mb-1"
     >
       {label}
-    </span>
+    </label>
   {/if}
-  <select
-    bind:this={_element}
-    {...props}
-    {title}
-    {disabled}
-    class="disabled:opacity-50 w-full px-4 text-black bg-gray-100"
-    class:pt-6={label}
-    class:border-0={!_focused}
-    class:border-b={label}
-    aria-label={label}
-    value={_itemSelected}
-    on:change={onChange}
-    on:input
-    on:keydown
-    on:keypress
-    on:keyup
-    on:click
-    on:focus={() => (_focused = true)}
-    on:focus
-    on:blur={() => (_focused = false)}
-    on:blur
-  >
-    {#if nullable}
-      <option value={null}>&nbsp;</option>
-    {/if}
-    {#each _allItemIndexed as item}
-      <option value={item.value}>{item.text}</option>
-    {/each}
-  </select>
+
+  <div class="relative">
+    <select
+      id="select-{label}"
+      bind:this={_element}
+      {...props}
+      {title}
+      {disabled}
+      class="block w-full px-3 py-2 pr-10 border border-github-border rounded-md shadow-sm
+             focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500
+             text-github-text bg-white text-sm appearance-none
+             {disabled ? 'opacity-60 cursor-not-allowed bg-github-bg' : ''}"
+      aria-label={label}
+      value={_itemSelected}
+      on:change={onChange}
+      on:input
+      on:keydown
+      on:keypress
+      on:keyup
+      on:click
+      on:focus={() => (_focused = true)}
+      on:focus
+      on:blur={() => (_focused = false)}
+      on:blur
+    >
+      {#if nullable}
+        <option value={null}>&nbsp;</option>
+      {/if}
+      {#each _allItemIndexed as item}
+        <option value={item.value}>{item.text}</option>
+      {/each}
+    </select>
+
+    <!-- Custom dropdown arrow -->
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-github-gray">
+      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </div>
+  </div>
 </div>
