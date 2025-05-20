@@ -14,7 +14,7 @@
       opacity: 1,
     }}
   >
-    <nav class="absolute flex w-full h-full pointer-events-auto z-10 bg-white">
+    <nav class="absolute flex w-full h-full pointer-events-auto z-10 bg-white dark:bg-github-darkHeader">
       <div class="w-full">
         <slot />
       </div>

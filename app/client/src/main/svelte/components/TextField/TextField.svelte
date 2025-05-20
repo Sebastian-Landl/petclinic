@@ -24,7 +24,7 @@
   {#if label}
     <label
       for="input-{label}"
-      class="block text-sm font-medium text-github-text mb-1"
+      class="block text-sm font-medium text-github-text dark:text-github-darkText mb-1"
     >
       {label}
     </label>
@@ -40,7 +40,8 @@
     class="block w-full px-3 py-2 border border-github-border rounded-md shadow-sm placeholder-github-gray
            focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500
            text-github-text bg-white text-sm
-           {disabled ? 'opacity-60 cursor-not-allowed bg-github-bg' : ''}"
+           dark:bg-github-darkHeader dark:border-github-darkBorder dark:text-github-darkText dark:placeholder-github-darkGray
+           {disabled ? 'opacity-60 cursor-not-allowed bg-github-bg dark:bg-github-darkBg' : ''}"
     aria-label={label}
     bind:value={valueInternal}
     on:change={onChange}

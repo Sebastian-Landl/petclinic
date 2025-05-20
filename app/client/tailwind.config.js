@@ -2,6 +2,7 @@ import colors from "tailwindcss/colors";
 import forms from "@tailwindcss/forms";
 export default {
   mode: "jit",
+  darkMode: 'class',
   content: ["./src/**/*.{html,svelte,js,ts}"],
   theme: {
     extend: {
@@ -20,6 +21,7 @@ export default {
           900: "#05264c",
         },
         github: {
+          // Light mode colors
           bg: "#f6f8fa",       // GitHub background
           border: "#e1e4e8",   // GitHub border color
           header: "#24292e",   // GitHub header
@@ -30,6 +32,24 @@ export default {
           danger: "#cb2431",   // GitHub danger/red
           warning: "#f9c513",  // GitHub warning/yellow
           gray: "#6a737d",     // GitHub gray text
+
+          // Dark mode colors
+          darkBg: "#0d1117",       // GitHub dark background
+          darkBorder: "#30363d",   // GitHub dark border color
+          darkHeader: "#161b22",   // GitHub dark header
+          darkText: "#c9d1d9",     // GitHub dark text
+          darkLink: "#58a6ff",     // GitHub dark link
+          darkHover: "#161b22",    // GitHub dark hover background
+          darkSuccess: "#2ea043",  // GitHub dark success/green
+          darkDanger: "#f85149",   // GitHub dark danger/red
+          darkWarning: "#e3b341",  // GitHub dark warning/yellow
+          darkGray: "#8b949e",     // GitHub dark gray text
+
+          // Additional dark mode colors for components
+          darkInput: "#0d1117",    // Dark input background
+          darkSelect: "#0d1117",   // Dark select background
+          darkCard: "#161b22",     // Dark card background
+          darkBorder2: "#21262d",  // Lighter dark border
         },
         title: colors.gray,
         label: colors.gray,

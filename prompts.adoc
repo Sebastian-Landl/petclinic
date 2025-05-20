@@ -1,3 +1,9 @@
-=== Github like UI
-. Make the UI of this project more user-friendly and look like the github UI.
-. There is now a useless user button on the top right. Please remove it as there is no login logic.
+= Prompts for PetClinic UI Improvements
+
+== GitHub-like UI
+* Make the UI of this project more user-friendly and look like the GitHub UI.
+* There is now a useless user button on the top right. Please remove it as there is no login logic.
+
+== Dark and Light Mode
+* Now implement a dark and light mode. Also implement a toggle in the UI.
+* Hey not everything turns dark in the dark mode yet. The filter in the sub pages and the header of the results is still white in darkmode.

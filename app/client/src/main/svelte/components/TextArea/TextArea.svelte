@@ -29,6 +29,8 @@
       class="px-4 pt-2 text-xs absolute left-0 top-0"
       class:text-label-600={!focused}
       class:text-primary-500={focused}
+      class:dark:text-github-darkGray={!focused}
+      class:dark:text-primary-400={focused}
     >
       {label}
     </span>
@@ -38,11 +40,12 @@
     {...props}
     {title}
     {disabled}
-    class="disabled:opacity-50 w-full px-4 text-black bg-gray-100"
+    class="disabled:opacity-50 w-full px-4 text-black bg-gray-100 dark:bg-github-darkHeader dark:text-github-darkText"
     class:pt-6={label}
     class:border-0={!focused}
     class:resize-none={!resize}
     class:border-b={label}
+    class:dark:border-github-darkBorder={label}
     aria-label={label}
     bind:value={valueInternal}
     on:input

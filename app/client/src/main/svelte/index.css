@@ -7,9 +7,10 @@ html {
 }
 
 body {
-  @apply bg-github-bg text-github-text;
+  @apply bg-github-bg text-github-text dark:bg-github-darkBg dark:text-github-darkText;
   font-size: 14px;
   line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1,
@@ -55,12 +56,12 @@ h6,
 }
 
 hr {
-  @apply border-t border-github-border;
+  @apply border-t border-github-border dark:border-github-darkBorder;
   margin: 1rem 0;
 }
 
 a {
-  @apply text-github-link hover:underline;
+  @apply text-github-link hover:underline dark:text-github-darkLink;
 }
 
 /* GitHub-style table */
@@ -69,24 +70,52 @@ a {
 }
 
 .github-table th {
-  @apply bg-github-bg text-github-text text-left py-2 px-4 font-semibold border-b border-github-border;
+  @apply bg-github-bg text-github-text text-left py-2 px-4 font-semibold border-b border-github-border
+         dark:bg-github-darkBg dark:text-github-darkText dark:border-github-darkBorder;
 }
 
 .github-table td {
-  @apply py-2 px-4 border-b border-github-border;
+  @apply py-2 px-4 border-b border-github-border dark:border-github-darkBorder;
 }
 
 .github-table tr:hover {
-  @apply bg-github-hover;
+  @apply bg-github-hover dark:bg-github-darkHover;
+}
+
+/* Table styles for all pages */
+table thead tr {
+  @apply bg-gray-100 dark:bg-github-darkHeader;
+}
+
+table thead th {
+  @apply border-b-2 border-gray-300 dark:border-github-darkBorder;
+}
+
+table thead th span {
+  @apply text-gray-600 dark:text-github-darkGray;
+}
+
+table tbody tr:hover {
+  @apply bg-github-hover dark:bg-github-darkHover;
+}
+
+table tbody td {
+  @apply border-b border-gray-200 dark:border-github-darkBorder;
+}
+
+table tbody td a {
+  @apply text-blue-600 dark:text-github-darkLink;
 }
 
 /* GitHub-style card */
 .github-card {
-  @apply bg-white border border-github-border rounded-md p-4 mb-4;
+  @apply bg-white border border-github-border rounded-md p-4 mb-4
+         dark:bg-github-darkHeader dark:border-github-darkBorder;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .github-card-header {
-  @apply flex justify-between items-center mb-4 pb-2 border-b border-github-border;
+  @apply flex justify-between items-center mb-4 pb-2 border-b border-github-border dark:border-github-darkBorder;
 }
 
 button:focus {

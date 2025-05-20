@@ -16,9 +16,17 @@
   import Vet from "./pages/Vet.svelte";
   import VetViewer from "./pages/VetViewer.svelte";
   import Visit from "./pages/Visit.svelte";
+  import ThemeToggle from "./components/ThemeToggle";
+  import { theme } from "./stores/theme.js";
 
   let menuVisible = false;
   let searchQuery = "";
+  let currentTheme;
+
+  // Subscribe to theme changes
+  theme.subscribe(value => {
+    currentTheme = value;
+  });
 
   // Navigation items with icons
   const navItems = [
@@ -40,7 +48,7 @@
 
 <article class="flex flex-col h-screen">
   <!-- GitHub-like header -->
-  <header class="flex items-center justify-between bg-github-header text-white p-2 h-16 border-b border-github-border">
+  <header class="flex items-center justify-between bg-github-header dark:bg-github-darkHeader text-white p-2 h-16 border-b border-github-border dark:border-github-darkBorder">
     <div class="flex items-center">
       <!-- Hamburger menu for mobile -->
       <div class="md:hidden">
@@ -58,7 +66,7 @@
         {#each navItems as item}
           <a
             href={item.path}
-            class="flex items-center px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 rounded-md"
+            class="flex items-center px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 dark:hover:bg-gray-800 rounded-md"
           >
             <i class="material-icons text-sm mr-1">{item.icon}</i>
             {item.name}
@@ -78,14 +86,18 @@
           bind:value={searchQuery}
           on:keydown={handleSearch}
           placeholder="Search..."
-          class="block w-full pl-10 pr-3 py-1 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-sm"
+          class="block w-full pl-10 pr-3 py-1 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-sm dark:bg-gray-800 dark:border-gray-700"
         />
       </div>
     </div>
 
     <!-- Right side navigation -->
-    <div class="flex items-center">
-      <a href="/help" class="text-white hover:text-gray-300 p-2 rounded-md hover:bg-gray-700">
+    <div class="flex items-center space-x-2">
+      <!-- Theme toggle -->
+      <ThemeToggle />
+
+      <!-- Help link -->
+      <a href="/help" class="text-white hover:text-gray-300 p-2 rounded-md hover:bg-gray-700 dark:hover:bg-gray-800">
         <i class="material-icons">help_outline</i>
       </a>
     </div>
@@ -93,20 +105,20 @@
 
   <div class="flex flex-1 overflow-hidden">
     <!-- Sidebar - GitHub style -->
-    <aside class="hidden md:block w-64 bg-white border-r border-github-border overflow-y-auto">
+    <aside class="hidden md:block w-64 bg-white dark:bg-github-darkHeader border-r border-github-border dark:border-github-darkBorder overflow-y-auto">
       <div class="p-4">
         <div class="mb-4">
-          <h3 class="text-sm font-semibold text-github-text mb-2">Client</h3>
+          <h3 class="text-sm font-semibold text-github-text dark:text-github-darkText mb-2">Client</h3>
           <ul class="space-y-1">
             <li>
-              <a href="/owner" class="flex items-center px-2 py-1 text-sm text-github-text hover:bg-github-hover rounded-md">
-                <i class="material-icons text-github-gray text-sm mr-2">person</i>
+              <a href="/owner" class="flex items-center px-2 py-1 text-sm text-github-text dark:text-github-darkText hover:bg-github-hover dark:hover:bg-github-darkHover rounded-md">
+                <i class="material-icons text-github-gray dark:text-github-darkGray text-sm mr-2">person</i>
                 Owners
               </a>
             </li>
             <li>
-              <a href="/pet" class="flex items-center px-2 py-1 text-sm text-github-text hover:bg-github-hover rounded-md">
-                <i class="material-icons text-github-gray text-sm mr-2">pets</i>
+              <a href="/pet" class="flex items-center px-2 py-1 text-sm text-github-text dark:text-github-darkText hover:bg-github-hover dark:hover:bg-github-darkHover rounded-md">
+                <i class="material-icons text-github-gray dark:text-github-darkGray text-sm mr-2">pets</i>
                 Pets
               </a>
             </li>
@@ -114,29 +126,29 @@
         </div>
 
         <div>
-          <h3 class="text-sm font-semibold text-github-text mb-2">Clinic</h3>
+          <h3 class="text-sm font-semibold text-github-text dark:text-github-darkText mb-2">Clinic</h3>
           <ul class="space-y-1">
             <li>
-              <a href="/visit" class="flex items-center px-2 py-1 text-sm text-github-text hover:bg-github-hover rounded-md">
-                <i class="material-icons text-github-gray text-sm mr-2">event</i>
+              <a href="/visit" class="flex items-center px-2 py-1 text-sm text-github-text dark:text-github-darkText hover:bg-github-hover dark:hover:bg-github-darkHover rounded-md">
+                <i class="material-icons text-github-gray dark:text-github-darkGray text-sm mr-2">event</i>
                 Visits
               </a>
             </li>
             <li>
-              <a href="/vet" class="flex items-center px-2 py-1 text-sm text-github-text hover:bg-github-hover rounded-md">
-                <i class="material-icons text-github-gray text-sm mr-2">medical_services</i>
+              <a href="/vet" class="flex items-center px-2 py-1 text-sm text-github-text dark:text-github-darkText hover:bg-github-hover dark:hover:bg-github-darkHover rounded-md">
+                <i class="material-icons text-github-gray dark:text-github-darkGray text-sm mr-2">medical_services</i>
                 Vets
               </a>
             </li>
             <li>
-              <a href="/enum/skill" class="flex items-center px-2 py-1 text-sm text-github-text hover:bg-github-hover rounded-md">
-                <i class="material-icons text-github-gray text-sm mr-2">psychology</i>
+              <a href="/enum/skill" class="flex items-center px-2 py-1 text-sm text-github-text dark:text-github-darkText hover:bg-github-hover dark:hover:bg-github-darkHover rounded-md">
+                <i class="material-icons text-github-gray dark:text-github-darkGray text-sm mr-2">psychology</i>
                 Skills
               </a>
             </li>
             <li>
-              <a href="/enum/species" class="flex items-center px-2 py-1 text-sm text-github-text hover:bg-github-hover rounded-md">
-                <i class="material-icons text-github-gray text-sm mr-2">category</i>
+              <a href="/enum/species" class="flex items-center px-2 py-1 text-sm text-github-text dark:text-github-darkText hover:bg-github-hover dark:hover:bg-github-darkHover rounded-md">
+                <i class="material-icons text-github-gray dark:text-github-darkGray text-sm mr-2">category</i>
                 Species
               </a>
             </li>
@@ -147,16 +159,19 @@
 
     <!-- Mobile menu -->
     <Menu bind:show={menuVisible}>
-      <div class="flex flex-col p-4 text-github-text gap-2">
-        <span class="text-lg font-semibold capitalize">Client</span>
+      <div class="flex flex-col p-4 text-github-text dark:text-github-darkText gap-2 dark:bg-github-darkHeader">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-lg font-semibold capitalize">Client</span>
+          <ThemeToggle />
+        </div>
         <div class="flex flex-col p-2 gap-2">
           {#each navItems as item}
             <a
               on:click={() => (menuVisible = false)}
               href={item.path}
-              class="flex items-center px-2 py-1 text-sm hover:bg-github-hover rounded-md"
+              class="flex items-center px-2 py-1 text-sm hover:bg-github-hover dark:hover:bg-github-darkHover rounded-md"
             >
-              <i class="material-icons text-github-gray text-sm mr-2">{item.icon}</i>
+              <i class="material-icons text-github-gray dark:text-github-darkGray text-sm mr-2">{item.icon}</i>
               {item.name}
             </a>
           {/each}
@@ -165,7 +180,7 @@
     </Menu>
 
     <!-- Main content area -->
-    <main class="flex-1 overflow-y-auto bg-github-bg p-4">
+    <main class="flex-1 overflow-y-auto bg-github-bg dark:bg-github-darkBg p-4">
       <Toast />
     <Router>
       <Route path="/" component={AppHome} />
@@ -188,20 +203,20 @@
     </div>
 
     <!-- GitHub-style footer -->
-    <footer class="bg-white border-t border-github-border py-6 px-4">
+    <footer class="bg-white dark:bg-github-darkHeader border-t border-github-border dark:border-github-darkBorder py-6 px-4">
       <div class="max-w-7xl mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-center">
           <div class="flex items-center mb-4 md:mb-0">
             <img src="/pets.png" alt="Petclinic" class="h-6 w-6 mr-2" />
-            <span class="text-sm text-github-gray">© 2023 Petclinic</span>
+            <span class="text-sm text-github-gray dark:text-github-darkGray">© 2023 Petclinic</span>
           </div>
 
           <nav class="flex flex-wrap justify-center gap-4">
-            <a href="/help" class="text-sm text-github-gray hover:text-github-link">Help</a>
-            <a href="/help" class="text-sm text-github-gray hover:text-github-link">Terms</a>
-            <a href="/help" class="text-sm text-github-gray hover:text-github-link">Privacy</a>
-            <a href="/help" class="text-sm text-github-gray hover:text-github-link">Status</a>
-            <a href="/help" class="text-sm text-github-gray hover:text-github-link">Contact</a>
+            <a href="/help" class="text-sm text-github-gray dark:text-github-darkGray hover:text-github-link dark:hover:text-github-darkLink">Help</a>
+            <a href="/help" class="text-sm text-github-gray dark:text-github-darkGray hover:text-github-link dark:hover:text-github-darkLink">Terms</a>
+            <a href="/help" class="text-sm text-github-gray dark:text-github-darkGray hover:text-github-link dark:hover:text-github-darkLink">Privacy</a>
+            <a href="/help" class="text-sm text-github-gray dark:text-github-darkGray hover:text-github-link dark:hover:text-github-darkLink">Status</a>
+            <a href="/help" class="text-sm text-github-gray dark:text-github-darkGray hover:text-github-link dark:hover:text-github-darkLink">Contact</a>
           </nav>
         </div>
       </div>

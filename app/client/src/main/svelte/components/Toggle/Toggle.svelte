@@ -85,6 +85,8 @@
         class="text-xs"
         class:text-label-600={!focused}
         class:text-primary-500={focused}
+        class:dark:text-github-darkGray={!focused}
+        class:dark:text-primary-400={focused}
       >
         {label}
       </span>
@@ -105,10 +107,12 @@
     {...props}
     {title}
     {disabled}
-    class="disabled:opacity-50 w-full px-4 text-black bg-gray-100 text-transparent"
+    class="disabled:opacity-50 w-full px-4 text-black bg-gray-100 text-transparent
+           dark:bg-github-darkHeader dark:text-github-darkText"
     class:pt-6={label}
     class:border-0={!focused}
     class:border-b={label}
+    class:dark:border-github-darkBorder={label}
     aria-label={label}
     value="null"
     on:change={onChange}
@@ -124,7 +128,7 @@
     on:blur
   >
     {#each allItemProcessed as item}
-      <option class="text-black" value={item.value}>
+      <option class="text-black dark:text-github-darkText dark:bg-github-darkHeader" value={item.value}>
         {item.text}
       </option>
     {/each}
