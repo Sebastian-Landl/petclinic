@@ -7,7 +7,6 @@
     "vscode": {
       "extensions": [
         "vscjava.vscode-java-pack",
-        "vscjava.vscode-spring-boot-dashboard",
         "vmware.vscode-spring-boot",
         "svelte.svelte-vscode",
         "bradlc.vscode-tailwindcss",
