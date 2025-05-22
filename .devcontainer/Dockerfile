@@ -1,21 +1,10 @@
-FROM mcr.microsoft.com/devcontainers/base:ubuntu
+# Use the official Java 17 image as the base
+FROM mcr.microsoft.com/devcontainers/java:17
 
-# Install basic tools
-RUN apt-get update && apt-get install -y \
-    curl \
-    wget \
-    unzip \
-    git \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
+# Install Node.js (LTS version) and npm
+RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
+    && apt-get update \
+    && apt-get install -y nodejs
 
-# Create vscode user
-RUN groupadd --gid 1000 vscode \
-    && useradd --uid 1000 --gid vscode --shell /bin/bash --create-home vscode
-
-# Switch to vscode user for the rest of the setup
-USER vscode
-WORKDIR /home/vscode
-
-# The Java and Node.js features will be installed by devcontainer.json
-# This Dockerfile just provides the base environment
+# Set the working directory
+WORKDIR /workspace

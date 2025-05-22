@@ -3,17 +3,6 @@
   "dockerComposeFile": "docker-compose.yml",
   "service": "devcontainer",
   "workspaceFolder": "/workspace",
-  
-  "features": {
-    "ghcr.io/devcontainers/features/java:1": {
-      "version": "21",
-      "installGradle": "true"
-    },
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "22"
-    },
-    "ghcr.io/devcontainers/features/git:1": {}
-  },
 
   "customizations": {
     "vscode": {
@@ -28,12 +17,6 @@
         "ms-vscode.vscode-typescript-next"
       ],
       "settings": {
-        "java.configuration.runtimes": [
-          {
-            "name": "JavaSE-21",
-            "path": "/usr/local/sdkman/candidates/java/current"
-          }
-        ],
         "java.compile.nullAnalysis.mode": "automatic",
         "spring-boot.ls.problem.application-properties.unknown-property": "ignore"
       }
@@ -52,7 +35,7 @@
     }
   },
 
-  "postCreateCommand": ".devcontainer/postCreateCommand.sh",
+  "postCreateCommand": "npm install --prefix app/client",
   
   "remoteUser": "vscode"
 }
