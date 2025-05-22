@@ -3,7 +3,6 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
-
   "customizations": {
     "vscode": {
       "extensions": [
@@ -22,8 +21,10 @@
       }
     }
   },
-
-  "forwardPorts": [8080, 5000],
+  "forwardPorts": [
+    8080,
+    5000
+  ],
   "portsAttributes": {
     "8080": {
       "label": "Backend API",
@@ -34,8 +35,13 @@
       "onAutoForward": "openBrowser"
     }
   },
-
   "postCreateCommand": "npm install --prefix app/client",
-  
-  "remoteUser": "vscode"
+  "remoteUser": "vscode",
+  "features": {
+    "ghcr.io/devcontainers-extra/features/gradle-sdkman:2": {
+      "version": "latest",
+      "jdkVersion": "latest",
+      "jdkDistro": "tem"
+    }
+  }
 }
