@@ -1,8 +1,8 @@
 {
   "name": "PetClinic Development",
-  "dockerComposeFile": "docker-compose.yml",
-  "service": "devcontainer",
-  "workspaceFolder": "/workspace",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
 
   "customizations": {
     "vscode": {
