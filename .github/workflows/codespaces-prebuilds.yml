@@ -1,0 +1,65 @@
+name: Codespaces Prebuilds
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - '.devcontainer/**'
+      - '.github/codespaces/**'
+      - 'app/client/package.json'
+      - 'build.gradle'
+      - 'settings.gradle'
+
+jobs:
+  prebuild:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == github.actor
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup Java 21
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        
+    - name: Cache Gradle packages
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+          
+    - name: Cache npm packages
+      uses: actions/cache@v4
+      with:
+        path: app/client/node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('app/client/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+          
+    - name: Install frontend dependencies
+      run: |
+        cd app/client
+        npm ci
+        
+    - name: Build project
+      run: ./gradlew build -x test
+      
+    - name: Test Codespaces setup
+      run: |
+        echo "✅ Codespaces prebuild completed successfully"
+        echo "Frontend dependencies: $(cd app/client && npm list --depth=0 | wc -l) packages"
+        echo "Java version: $(java -version 2>&1 | head -n 1)"
+        echo "Node version: $(node --version)"
+        echo "Gradle version: $(./gradlew --version | grep Gradle)"

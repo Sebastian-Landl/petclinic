@@ -2,6 +2,24 @@
 :experimental: true
 = Self-Contained System mit Spring-Boot und Svelte-UI
 
+== GitHub Codespaces
+
+image:https://github.com/codespaces/badge.svg[Open in GitHub Codespaces,link=https://codespaces.new/sebastian-landl/petclinic]
+
+Diese Anwendung ist für die Entwicklung in GitHub Codespaces vorkonfiguriert. Klicken Sie auf den Button oben, um eine neue Codespace-Instanz zu starten.
+
+=== Schnellstart mit Codespaces
+
+1. Öffnen Sie das Repository in GitHub Codespaces
+2. Warten Sie, bis der Container erstellt und die Abhängigkeiten installiert sind
+3. Verwenden Sie VS Code Tasks zum Starten der Anwendung:
+   - `Ctrl+Shift+P` → "Tasks: Run Task" → "Start Both (Backend + Frontend)"
+
+Die Anwendung ist dann verfügbar unter:
+- Frontend: http://localhost:5000
+- Backend API: http://localhost:8080/api
+- GraphQL: http://localhost:8080/api/graphiql
+
 == Projekte
 
 === app/backend-api
