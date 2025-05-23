@@ -45,7 +45,6 @@ public class BackendConfiguration {
         registration.allowCredentials(true);
         registration.allowPrivateNetwork(true);
         registration.maxAge(3600L);
-        registration.exposedHeaders("*"); // Expose all headers to frontend
     }
 
     /**
