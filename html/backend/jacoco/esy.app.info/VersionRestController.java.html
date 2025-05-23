@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,48 +18,40 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(originPatterns = {
-    &quot;https://*.app.github.dev&quot;,
-    &quot;https://*.github.dev&quot;,
-    &quot;https://*.githubpreview.dev&quot;,
-    &quot;https://localhost&quot;,
-    &quot;http://localhost:*&quot;,
-    &quot;https://localhost:*&quot;
-})
 public class VersionRestController {
 
-<span class="fc" id="L32">    private static Logger LOG = LoggerFactory.getLogger(VersionRestController.class);</span>
+<span class="fc" id="L23">    private static Logger LOG = LoggerFactory.getLogger(VersionRestController.class);</span>
 
     private final VersionRepository repository;
 
     @ExceptionHandler
     void onMissingResourceException(final MissingResourceException cause, final HttpServletResponse response) throws IOException {
-<span class="fc" id="L38">        LOG.error(cause.getMessage());</span>
-<span class="fc" id="L39">        LOG.trace(cause.getMessage(), cause);</span>
-<span class="fc" id="L40">        response.sendError(HttpStatus.NO_CONTENT.value(), cause.getMessage());</span>
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L29">        LOG.error(cause.getMessage());</span>
+<span class="fc" id="L30">        LOG.trace(cause.getMessage(), cause);</span>
+<span class="fc" id="L31">        response.sendError(HttpStatus.NO_CONTENT.value(), cause.getMessage());</span>
+<span class="fc" id="L32">    }</span>
 
     @ExceptionHandler
     void onNoSuchElementException(final NoSuchElementException cause, final HttpServletResponse response) throws IOException {
-<span class="fc" id="L45">        LOG.error(cause.getMessage());</span>
-<span class="fc" id="L46">        LOG.trace(cause.getMessage(), cause);</span>
-<span class="fc" id="L47">        response.sendError(HttpStatus.BAD_REQUEST.value(), cause.getMessage());</span>
-<span class="fc" id="L48">    }</span>
+<span class="fc" id="L36">        LOG.error(cause.getMessage());</span>
+<span class="fc" id="L37">        LOG.trace(cause.getMessage(), cause);</span>
+<span class="fc" id="L38">        response.sendError(HttpStatus.BAD_REQUEST.value(), cause.getMessage());</span>
+<span class="fc" id="L39">    }</span>
 
     @ExceptionHandler
     void onInputMismatchException(final InputMismatchException cause, final HttpServletResponse response) throws IOException {
-<span class="fc" id="L52">        LOG.error(cause.getMessage());</span>
-<span class="fc" id="L53">        LOG.trace(cause.getMessage(), cause);</span>
-<span class="fc" id="L54">        response.sendError(HttpStatus.BAD_REQUEST.value(), cause.getMessage());</span>
-<span class="fc" id="L55">    }</span>
+<span class="fc" id="L43">        LOG.error(cause.getMessage());</span>
+<span class="fc" id="L44">        LOG.trace(cause.getMessage(), cause);</span>
+<span class="fc" id="L45">        response.sendError(HttpStatus.BAD_REQUEST.value(), cause.getMessage());</span>
+<span class="fc" id="L46">    }</span>
 
     @GetMapping(
             value = &quot;/version&quot;,
             produces = &quot;application/json&quot;
     )
     public ResponseEntity&lt;Version&gt; json() {
-<span class="fc" id="L62">        final Version version = repository.find();</span>
-<span class="fc" id="L63">        return ResponseEntity.ok().body(version);</span>
+<span class="fc" id="L53">        final Version version = repository.find();</span>
+<span class="fc" id="L54">        return ResponseEntity.ok().body(version);</span>
     }
 
     @GetMapping(
@@ -68,9 +59,9 @@ public class VersionRestController {
             produces = &quot;text/asciidoc;charset=UTF-8&quot;
     )
     public ResponseEntity&lt;String&gt; adoc() {
-<span class="fc" id="L71">        final Version version = repository.find();</span>
-<span class="fc" id="L72">        final String adoc = version + &quot;\n&quot;;</span>
-<span class="fc" id="L73">        return ResponseEntity.ok().body(adoc);</span>
+<span class="fc" id="L62">        final Version version = repository.find();</span>
+<span class="fc" id="L63">        final String adoc = version + &quot;\n&quot;;</span>
+<span class="fc" id="L64">        return ResponseEntity.ok().body(adoc);</span>
     }
 
     @GetMapping(
@@ -78,9 +69,9 @@ public class VersionRestController {
             produces = &quot;text/html;charset=UTF-8&quot;
     )
     public ResponseEntity&lt;String&gt; html() {
-<span class="fc" id="L81">        final Version version = repository.find();</span>
-<span class="fc" id="L82">        final String html = &quot;&lt;span id=\&quot;version\&quot;&gt;&quot; + version + &quot;&lt;/span&gt;&lt;br/&gt;\n&quot;;</span>
-<span class="fc" id="L83">        return ResponseEntity.ok().body(html);</span>
+<span class="fc" id="L72">        final Version version = repository.find();</span>
+<span class="fc" id="L73">        final String html = &quot;&lt;span id=\&quot;version\&quot;&gt;&quot; + version + &quot;&lt;/span&gt;&lt;br/&gt;\n&quot;;</span>
+<span class="fc" id="L74">        return ResponseEntity.ok().body(html);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
